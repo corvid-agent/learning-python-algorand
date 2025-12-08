@@ -8,6 +8,7 @@ venv/
 env/
 .venv/
 ENV/
+.mypy_cache/
 
 # IDE
 .vscode/

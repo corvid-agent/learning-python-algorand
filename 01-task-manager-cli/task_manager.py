@@ -1,15 +1,41 @@
+import json
+
+
 def main():
     """
     Main function to run the task manager CLI application.
     """
 
+    
     print("=== Task Manager CLI ===")
     print("Welcome to the Task Manager!")
-    
+
+
     tasks = []
+
+
+    def save_tasks() ->  None:
+        with open("tasks.json", "w") as f:
+            json.dump(tasks, f)
+
+
+    def load_tasks() -> None:
+        nonlocal tasks
+        try:
+            with open("tasks.json", "r") as f:
+                tasks = json.load(f)
+        except FileNotFoundError:
+            pass
+
+
+    load_tasks()
+
 
     def add_task(description: str) -> None:
         tasks.append(description)
+        save_tasks()
+        list_task()
+
 
     def list_task() -> None:
         for index, task in enumerate(tasks):
@@ -21,8 +47,11 @@ def main():
         if 0 <= index < len(tasks):
             removed = tasks.pop(index)
             print(f'Task completed: {removed}')
+            save_tasks()
+            list_task()
         else:
             print('Número inválido')
+
 
     while True:
         print("\n1. Add Task")
@@ -30,7 +59,9 @@ def main():
         print("\n3. Complete Task")
         print("\n4. Exit")
 
+
         choice = int(input('Choose an option: '))
+
 
         if choice == 1:
             description = str(input('Add task: '))
