@@ -26,3 +26,7 @@ Thumbs.db
 # Project specific
 *.log
 *.sqlite3
+
+# Claude Code
+.claude/
+CLAUDE.md
