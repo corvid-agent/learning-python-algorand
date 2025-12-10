@@ -60,8 +60,11 @@ def main():
         print("\n3. Complete Task")
         print("\n4. Exit")
 
-
-        choice = int(input('Choose an option: '))
+        try:
+            choice = int(input('Choose an option: '))
+        except ValueError:
+            print('Type a valid number!')
+            continue
 
 
         if choice == 1:
@@ -70,8 +73,12 @@ def main():
         elif choice == 2:
             list_task()
         elif choice == 3:
-            number = int(input('Task number: '))
-            complete_task(number)
+            try:
+                number = int(input('Task number: '))
+                complete_task(number)
+            except ValueError:
+                print('Type a valid number!')
+                continue
         elif choice == 4:
             print('Cya!')
             break
